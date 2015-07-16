@@ -15,6 +15,13 @@ func generateDaytime() string {
   return t.Format(time.RFC3339)
 }
 
+func handleConnection(c net.Conn) {
+  d := generateDaytime()
+  // write the daytime to the connection
+  c.Write([]byte(d))
+  c.Close()
+}
+
 func main() {
   l, err := net.Listen("tcp", ":13")
   checkError(err)
@@ -27,9 +34,6 @@ func main() {
     c, err := l.Accept()
     checkError(err)
 
-    d := generateDaytime()
-    // write the daytime to the connection
-    c.Write([]byte(d))
-    c.Close()
+    go handleConnection(c)
   }
 }

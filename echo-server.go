@@ -10,6 +10,11 @@ func checkError(e error) {
   }
 }
 
+func handleConnection(c net.Conn) {
+  io.Copy(c, c)
+  c.Close()
+}
+
 func main() {
   l, err := net.Listen("tcp", ":7")
   checkError(err)
@@ -22,8 +27,6 @@ func main() {
     c, err := l.Accept()
     checkError(err)
 
-    io.Copy(c, c)
-
-    c.Close()
+    go handleConnection(c)
   }
 }

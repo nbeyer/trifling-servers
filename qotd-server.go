@@ -27,6 +27,14 @@ func loadQuotes() []string {
   return quotes
 }
 
+func handleConnection(c net.Conn, quotes []string) {
+  // select a random quote; a quote of the moment, instead of the day
+  q := quotes[rand.Intn(len(quotes))]
+  // write the quote to the connection
+  c.Write([]byte(q))
+  c.Close()
+}
+
 func main() {
   l, err := net.Listen("tcp", ":17")
   checkError(err)
@@ -42,10 +50,6 @@ func main() {
     c, err := l.Accept()
     checkError(err)
 
-    // select a random quote; a quote of the moment, instead of the day
-    q := quotes[rand.Intn(len(quotes))]
-    // write the quote to the connection
-    c.Write([]byte(q))
-    c.Close()
+    go handleConnection(c, quotes)
   }
 }
