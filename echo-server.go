@@ -1,6 +1,7 @@
 package main
 
 import "fmt"
+import "io"
 import "net"
 
 func checkError(e error) {
@@ -21,7 +22,8 @@ func main() {
     c, err := l.Accept()
     checkError(err)
 
-    c.Write([]byte("stub"))
+    io.Copy(c, c)
+
     c.Close()
   }
 }
