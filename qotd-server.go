@@ -12,12 +12,7 @@ func checkError(e error) {
   }
 }
 
-func main() {
-  l, err := net.Listen("tcp", ":17")
-  checkError(err)
-  defer l.Close()
-  fmt.Println("port connected")
-
+func loadQuotes() []string {
   f, err := os.Open("quotes")
   checkError(err)
   defer f.Close()
@@ -29,6 +24,16 @@ func main() {
   for s.Scan() {
     quotes = append(quotes, s.Text())
   }
+  return quotes
+}
+
+func main() {
+  l, err := net.Listen("tcp", ":17")
+  checkError(err)
+  defer l.Close()
+  fmt.Println("port connected")
+
+  quotes := loadQuotes()
   fmt.Println("quotes loaded; count =", len(quotes))
 
   fmt.Println("server started")
