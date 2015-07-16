@@ -4,6 +4,7 @@ import "bufio"
 import "fmt"
 import "net"
 import "os"
+import "math/rand"
 
 func checkError(e error) {
   if e != nil {
@@ -34,12 +35,12 @@ func main() {
 
   for {
     c, err := l.Accept()
-    if err != nil {
-      panic(err)
-    }
-    fmt.Println("connection made ...")
-    c.Write([]byte(quotes[0]))
+    checkError(err)
+
+    // select a random quote; a quote of the moment, instead of the day
+    q := quotes[rand.Intn(len(quotes))]
+    // write the quote to the connection
+    c.Write([]byte(q))
     c.Close()
-    fmt.Println("connection closed ...")
   }
 }
