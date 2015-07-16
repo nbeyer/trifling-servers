@@ -1,8 +1,8 @@
 package main
 
-// import "bufio"
 import "fmt"
 import "net"
+import "time"
 
 func checkError(e error) {
   if e != nil {
@@ -11,7 +11,8 @@ func checkError(e error) {
 }
 
 func generateDaytime() string {
-  return "today"
+  t := time.Now().UTC()
+  return t.Format(time.RFC3339)
 }
 
 func main() {
