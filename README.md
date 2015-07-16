@@ -4,3 +4,8 @@ A collection of trivial servers written in Go. This work spawned from reading th
 File: [qotd-server.go]
 
 Specification: RFC 865 https://tools.ietf.org/html/rfc865
+
+## Daytime
+File: [daytime-server.go]
+
+Specification: RFC 865 https://tools.ietf.org/html/rfc867
