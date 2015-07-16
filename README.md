@@ -8,4 +8,9 @@ Specification: RFC 865 https://tools.ietf.org/html/rfc865
 ## Daytime
 File: [daytime-server.go]
 
-Specification: RFC 865 https://tools.ietf.org/html/rfc867
+Specification: RFC 867 https://tools.ietf.org/html/rfc867
+
+## Echo
+File: [echo-server.go]
+
+Specification: RFC 862 https://tools.ietf.org/html/rfc862
